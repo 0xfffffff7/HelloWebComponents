@@ -1,0 +1,34 @@
+
+
+
+<script>
+  // カスタムエレメントを登録.
+  var Widget = document.registerElement('My-Widget');
+</script>
+
+<template id="MyWidgetTemplate">
+  <h2>Custom Widget!</h2>
+  <p></p>
+</template>
+
+<script>
+
+  // ShadowDOMの追加をしてrootを作成しておく.
+  var widget = document.querySelector("My-Widget");
+  var root = widget.createShadowRoot();
+
+  // テンプレートを取得.
+  // インポート対象のDocumentオブジェクトは親Documentとは別扱いなので、
+  // 現在のスクリプトを持つオーナードキュメントを指定して取得する必要がある.
+  var doc = document.currentScript.ownerDocument;
+  var t = doc.querySelector('#MyWidgetTemplate');
+
+  // 中身は.contentで書き換えできる.
+  t.content.querySelector('p').innerText = 'Custom Widget!';
+
+  // テンプレートのアクティベート.
+  var clone = document.importNode(t.content, true);
+  root.appendChild(clone);
+
+</script>
+
