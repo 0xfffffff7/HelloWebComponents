@@ -1,2 +1,3 @@
 # HelloWebComponents
-WebComponents Sample
+This is WebComponents sample like Polymer.
+
