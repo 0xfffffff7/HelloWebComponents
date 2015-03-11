@@ -8,7 +8,7 @@
 
 <template id="MyWidgetTemplate">
   <h2>Custom Widget!</h2>
-  <p></p>
+  <input type="text">
 </template>
 
 <script>
@@ -23,12 +23,19 @@
   var doc = document.currentScript.ownerDocument;
   var t = doc.querySelector('#MyWidgetTemplate');
 
-  // 中身は.contentで書き換えできる.
-  t.content.querySelector('p').innerText = 'Custom Widget!';
+  // 中身は.contentで操作できる.
+  var p = t.content.querySelector('input');
+  p.value = "defalut";
 
   // テンプレートのアクティベート.
   var clone = document.importNode(t.content, true);
   root.appendChild(clone);
+
+  // イベントリスナーの追加
+  root.addEventListener('click', function(e){
+	console.log(e.target);
+    e.target.value = 'Custom Widget!';
+  });
 
 </script>
 
